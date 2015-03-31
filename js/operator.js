@@ -16,16 +16,13 @@
     /* @ngInject */
     function AppRouteProvider( RestangularProvider, $routeProvider, $locationProvider, RESOURCES ) {
 
-        var baseHtml = RESOURCES.ROOT_HTML + "wahroo";
+        var baseHtml = RESOURCES.ROOT_HTML;
         RestangularProvider.setBaseUrl( RESOURCES.ROOT_API );
         RestangularProvider.setRestangularFields({ id: "id" });
 
         $routeProvider
            .when( '/vessels/:id/dt/:dt/men/:men',   { templateUrl: baseHtml + '/html/vessel/avail.html',  controller: 'VesselAvailabilityController' } )
            .when( '/vessels/:id',                   { templateUrl: baseHtml + '/html/vessel/detail.html', controller: 'VesselDetailsController' } )
-
-           .when( '/operators/:id/dt/:dt/men/:men', { templateUrl: baseHtml + '/html/operator/avail.html',  controller: 'OperatorAvailabilityController' } )
-           .when( '/operators/:id',                 { templateUrl: baseHtml + '/html/operator/detail.html', controller: 'OperatorDetailsController' } )
 
            .when( '/charters/:id/dt/:dt/men/:men',  { templateUrl: baseHtml + '/html/charter/avail.html',   controller: 'CharterAvailabilityController' } )
            .when( '/charters/:id',                  { templateUrl: baseHtml + '/html/charter/detail.html',  controller: 'CharterDetailsController' } )
@@ -111,9 +108,7 @@
             }
         });
 
-
     }
     AppRunner.$inject = ['$rootScope', '$timeout', '$window', '$templateCache', 'Restangular', 'RESOURCES' ];
-
 
 } )();

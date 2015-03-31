@@ -26,11 +26,11 @@ function mapsLoaded()
 
 whrldr.init = function( opt ) {
 
-    console.log( opt );
+    whrldr.log( opt );
     whrldr.webroot = opt.html_root;
 
     // LOAD CSS
-    head.load( whrldr.webroot + "wahroo/dist/" + opt.bundle + ".css",function() {
+    head.load( whrldr.webroot + "dist/" + opt.bundle + ".css",function() {
 
         whrldr.log( "CSS was loaded");
 
@@ -43,12 +43,12 @@ whrldr.init = function( opt ) {
             $script([
                 "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular-route.min.js",
                 "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular-animate.min.js",
-                // "//cdnjs.cloudflare.com/ajax/libs/angular-loading-bar/0.6.0/loading-bar.min.js",
                 "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular-cookies.min.js",
-                whrldr.webroot + "wahroo/js/angular/ui-date.js",
-                whrldr.webroot + "wahroo/js/angular/lodash.min.js" ,
-                whrldr.webroot + "wahroo/js/angular/restangular.min.js",
-                whrldr.webroot + "wahroo/js/angular/ng-map.js"
+
+                whrldr.webroot + "js/angular/ui-date.js",
+                whrldr.webroot + "js/angular/lodash.min.js" ,
+                whrldr.webroot + "js/angular/restangular.min.js",
+                whrldr.webroot + "js/angular/ng-map.js"
             ], function() {
 
                 // once we have all libraries - loading our APP
@@ -56,7 +56,7 @@ whrldr.init = function( opt ) {
 
                 jQuery("html").attr("ng-app","app"); //ensure we will be good with angular
 
-                $script ( whrldr.webroot + "wahroo/dist/" + opt.bundle + ".min.js?t=" + Math.random(), function() {
+                $script ( whrldr.webroot + "dist/" + opt.bundle + ".min.js?t=" + Math.random(), function() {
                     whrldr.log( "Application was loaded");
 
                     angular.module("app").constant('RESOURCES', (function() {
@@ -81,7 +81,7 @@ jQuery( document ).ready( function() {
 
     jQuery( "script" ).each( function( ) {
         if ( jQuery(this).attr("src") &&
-             jQuery(this).attr("src").indexOf( "wahroo/js/loader.js" ) !== -1 ) {
+             jQuery(this).attr("src").indexOf( "js/loader.js" ) !== -1 ) {
 
             whrldr.log( "wahroo: loader.js detected");
 
@@ -90,13 +90,14 @@ jQuery( document ).ready( function() {
 
             if ( jQuery("#wahroo-page-container").length === 0 ) {
 
-                whrldr.webroot  = jQuery(this).attr( "data-html-root" ) ? jQuery(this).attr( "data-html-root" ) : "";
+                whrldr.webroot  = jQuery(this).attr( "data-html-root" ) ? jQuery(this).attr( "data-html-root" ) : "wahroo-html-client/";
+
                 // inserting at the beginning of URL
                 jQuery( sSelector ).append( '<div id="wahroo-page-container">' +
                    // '<div floating-shopping-cart></div>' +
                     '<div class="view-frame-parent">' +
                         '<div class="view-frame" ng-init="scope_var=1" ng-view>'+
-                            '<div style="text-align:center"><img width="128" height="128" src="' + whrldr.webroot + 'wahroo/images/loader/340.gif" alt="loading" /></div>' +
+                            '<div style="text-align:center"><img width="128" height="128" src="' + whrldr.webroot + 'images/loader/340.gif" alt="loading" /></div>' +
                         '</div>' +
                     '</div>' +
                 '</div>' );

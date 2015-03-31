@@ -103,7 +103,7 @@ angular.module('app').directive('selectToBook', [ '$rootScope', 'ShoppingCart', 
 
 
 angular.module('app').directive('floatingShoppingCart', [ 'RESOURCES', '$rootScope', 'ShoppingCart', function( RESOURCES, $rootScope, ShoppingCart ){
-    var baseHtml = RESOURCES.ROOT_HTML + "wahroo";
+    var baseHtml = RESOURCES.ROOT_HTML;
     return {
         restrict: 'A',
         // scope: false,

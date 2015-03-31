@@ -1,6 +1,6 @@
 
 angular.module('app').directive('bigImages', [ 'RESOURCES', function( RESOURCES ){
-    var baseHtml = RESOURCES.ROOT_HTML + "wahroo";
+    var baseHtml = RESOURCES.ROOT_HTML;
     return {
         restrict: 'A',
         scope: {
@@ -47,7 +47,7 @@ angular.module('app').directive('bigImages', [ 'RESOURCES', function( RESOURCES 
 
 
 angular.module('app').directive('smallImages', [ 'RESOURCES', function( RESOURCES ){
-    var baseHtml = RESOURCES.ROOT_HTML + "wahroo";
+    var baseHtml = RESOURCES.ROOT_HTML;
     return {
         restrict: 'A',
         scope: {
