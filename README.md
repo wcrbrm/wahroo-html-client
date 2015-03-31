@@ -16,6 +16,8 @@ git clone https://github.com/wcrbrm/wahroo-html-client
 	data-url="/vessels/38"></script>
 <!-- WAHROO EMBEDDING END -->
 ```
+done, we are ready to start.
+
 
 ## Javascript loader parameters
 
