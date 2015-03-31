@@ -17,7 +17,7 @@ git clone https://github.com/wcrbrm/wahroo-html-client
 <!-- WAHROO EMBEDDING END -->
 ```
 
-## Loader Parameters
+## Javascript loader parameters
 
 All parameters are optional
 
@@ -31,4 +31,18 @@ Parameter | Description
  | Example: `/api/v1/`
 **data-container** | CSS selector of container to which embedding will be done
  | Example: `#booking-container`
+
+## Customizing CSS and Javascript
+
+To customize CSS or Javascript you need to have NodeJS and Grunt installed locally and working from your command line.
+If they are present, before starting modifications, please do the following:
+
+```
+cd wahroo-html-client
+# installs all required dependencies (plugins for grunt)
+npm install
+# start daemon to watch changes and recompile them on fly
+grunt watch
+```
+While the deamon is watching your changes, feel free to edit LESS files and Javscript - they will be automatically compiled in minified versions.
 
