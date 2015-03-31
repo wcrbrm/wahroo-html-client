@@ -4,7 +4,7 @@ WAHROO API HTML CLIENT
 
 ## Installation instructions
 
-#### 1. Create a clone of this repository
+#### 1. Save clone of this repository to your web root
 ```
 git clone https://github.com/wcrbrm/wahroo-html-client
 ```
