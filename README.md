@@ -12,8 +12,9 @@ git clone https://github.com/wcrbrm/wahroo-html-client
 #### 2. Put simplest code for embedding to your HTML
 ```
 <!-- WAHROO EMBEDDING START -->
-<script type="text/javascript" src="wahroo-html-client/js/loader.js" data-url="/vessels/38"></script>
-<!-- WAHROO EMBEDDING START -->
+<script type="text/javascript" src="wahroo-html-client/js/loader.js" 
+	data-url="/vessels/38"></script>
+<!-- WAHROO EMBEDDING END -->
 ```
 
 ## Loader Parameters
