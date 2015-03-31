@@ -1,0 +1,71 @@
+
+/* ANGULARJS ANIMATION START */
+
+.view-frame-parent {
+  position: relative;
+  min-height:500px;
+}
+
+.view-frame.ng-enter, .view-frame.ng-leave {
+  background: #ffffff;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  width:100%;
+}
+
+.view-frame.ng-enter {
+  -webkit-animation: 0.4s fade-in;
+  -moz-animation: 0.4s fade-in;
+  -o-animation: 0.4s fade-in;
+  animation: 0.4s fade-in;
+  z-index: 10;
+}
+
+.view-frame.ng-leave {
+  -webkit-animation: 0.4s fade-out;
+  -moz-animation: 0.4s fade-out;
+  -o-animation: 0.4s fade-out;
+  animation: 0.4s fade-out;
+  z-index:9;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-moz-keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+@-webkit-keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@-moz-keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+@-webkit-keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+/* ANGULARJS ANIMATION END */
+
+/* ANGULARJS VALIDATION START */
+input.ng-invalid.ng-touched,
+input.ng-invalid.ng-dirty {
+    background-color: #FFE8EE;
+}
+
+input.ng-invalid-pattern {
+    border: 1px darkred solid;
+}
+/* ANGULARJS VALIDATION END */
+

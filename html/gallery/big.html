@@ -1,0 +1,20 @@
+<div class="slideshow big"  ng-if="images.length">
+
+    <div class="changer">
+        <button ng-click="prev()" class="left">◄</button>
+        <div class="title">
+            <span ng-bind="currentSlide+1"></span> of <span ng-bind="images.length"></span>
+        </div>
+        <button ng-click="next()" class="right">►</button>
+    </div>
+
+    <div ng-repeat="image in images">
+        <div class="slide"
+                ng-class="'slide-'+$index" ng-if="currentSlide == $index && image.Path && image.File_Name">
+            <img
+                style="width:100%; height:auto;"
+                ng-src="{{imageRoot}}{{ (image.Path + image.File_Name).replace( '\\', '/') }}" alt="{{ image.File_Name }}" />
+        </div>
+    </div>
+
+</div>

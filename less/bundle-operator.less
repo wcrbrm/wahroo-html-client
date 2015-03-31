@@ -1,0 +1,247 @@
+// @import "loading-bar.min.less";
+@import "jqueryui.less";
+@import "angular.less";
+
+
+// .post-content { border: 1px #bbb solid; }
+#wrapper .post-content h2 { line-height:48px; }
+#wrapper .post-content a:hover h2 { color:#04ade0; }
+
+body * .light { color:#bbb; }
+
+// alternative to .clearfix
+#wahroo-page-container {
+  .group:before, .group:after { content: " "; display: table; }
+  .group:after { clear: both; }
+  .group { *zoom: 1; }
+
+  // w33pct - 3 columns of forms
+  .w33pct {
+      float: left;
+      width: 30%;
+      margin-right:3%;
+       @media( max-width: 480px ) {
+          float:none;
+          width:100%;
+          margin-right:0px;
+      }
+      textarea, input, select { width:90% }
+      textarea {min-width:90%; max-width:90%;}
+  }
+  .w66pct {
+      float: left;
+      width: 60%;
+      margin-right:3%;
+      @media( max-width: 800px ) {
+          float:none;
+          width:100%;
+          margin-right:0px;
+      }
+      textarea, input, select { width:90% }
+      textarea {min-width:90%; max-width:90%;}
+  }
+
+
+
+  // 2 columns - splitting into 2 on resolutions less then 640px
+  .g2 {
+      display:block;
+      position:relative;
+      border: none;
+      float: left;
+      width: 48%;
+      margin-right: 2%;
+      @media (max-width:640px) {
+          float: none;
+          width: 100%;
+          margin: 0px auto;
+      }
+  }
+  .g2.last {
+      margin-right: 0%;
+  }
+
+  // 2 columns - splitting into 2 on resolutions less then 800px
+  .gw2 {
+      display:block;
+      position:relative;
+      border: none;
+      float: left;
+      width: 48%;
+      margin-right: 3.5%;
+      @media (max-width:1000px) {
+          float: none;
+          width: 100%;
+          margin: 0px auto;
+      }
+  }
+  .gw2.last {
+      margin-right: 0%;
+  }
+
+  // always 2 column - irrelevant to responsive
+  .c2 {
+      display:block;
+      position:relative;
+      border: none;
+      float: left;
+      width: 48%;
+      margin-right: 3.5%;
+  }
+  .c2.last {
+      margin-right: 0%;
+  }
+
+
+
+  .slideshow {
+     position:relative;
+    .slide
+    {
+      position: absolute;
+      width: 100%;
+      height: auto;
+    }
+  }
+
+  .changer
+  {
+      position: absolute;
+      width: 110px;
+      height: 16px;
+      top: 10px;
+      right: 5px;
+      z-index: 1;
+
+      .title {
+
+        opacity: 0.85;
+        box-shadow:0px 0px 1px #000000;
+        -moz-box-shadow:0px 0px 1px #000000;
+        -webkit-box-shadow:0px 0px 1px #000000;
+
+        font-size:12px;
+        font-family: helvetica, arial;
+        text-align:center;
+        background:white;
+
+        float:left;
+        position:relative;
+        width:50px;
+        z-index:2;
+      }
+
+      .left,
+      .right {
+
+        opacity: 0.85;
+        box-shadow:0px 0px 1px #000000;
+        -moz-box-shadow:0px 0px 1px #000000;
+        -webkit-box-shadow:0px 0px 1px #000000;
+
+        color: #000;
+        text-align: center;
+        cursor: pointer;
+        background: #aaa;
+        border: 1px #bbb solid;
+        float:left;
+
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+        -o-user-select: none;
+        -khtml-user-select: none;
+      }
+
+      .left:hover,
+      .right:hover {
+        color: #414A4D;
+        background: #fff;
+
+      }
+  }
+
+  .slideshow.small {
+    .changer button { padding:2px; font-size:9px; height:20px; }
+  }
+
+  .charter {
+    padding-top:15px;
+    .from_price {  float:right; margin-left: 30px; }
+    .from_price * { color: #1a80b6; }
+    .book_btn_container {  float:right; margin-left: 30px; }
+
+    button {
+        padding-top:3px; padding-bottom:3px;
+        padding-left:20px; padding-right:20px;
+        cursor:pointer; font-size:16px;background: #444; color:white;
+        font-family: "Oswald", Arial, Helvetica, sans-serif;
+        vertical-align:middle;
+    }
+    button[disabled=disabled], button:disabled {
+        background: #aaa;
+    }
+  }
+
+  .availability_form {
+       background: #eee;
+       border: 1px #ccc solid;
+       margin-bottom: 20px;
+       text-align:center;
+       padding:20px;
+
+       label { font-weight:bold; color: #1a80b6; }
+
+      .datepicker { width:120px; text-align:center; }
+      .fishermen { text-align:center; width: 50px; }
+
+      button {
+        padding-top:3px; padding-bottom:3px;
+        padding-left:20px; padding-right:20px;
+        cursor:pointer; font-size:16px;background: #444; color:white;
+        font-family: "Oswald", Arial, Helvetica, sans-serif;
+        vertical-align:middle;
+      }
+      button[disabled=disabled], button:disabled {
+        background: #aaa;
+      }
+  }
+
+  .availability_form.highlighted {
+      background: #e8ab04;
+      label { color: #fff; }
+  }
+
+}
+
+#wahroo-shopping-cart {
+   position: fixed;
+   z-index:10;
+   right:5px;
+   top:46px;
+   width:250px;
+   border: 1px #bbb solid;
+   padding:10px;
+   background: white;
+   box-shadow: -2px 0px 10px #aaa;
+
+   h1,h2,h3,h4,h5 { text-align:center; }
+
+   button {
+      background: #04ade0;
+      padding-top:3px; padding-bottom:3px;
+      padding-left:20px; padding-right:20px;
+      cursor:pointer; font-size:16px; color:white;
+      font-family: "Oswald", Arial, Helvetica, sans-serif;
+      vertical-align:middle;
+   }
+   button[disabled=disabled], button:disabled {
+      background: #aaa;
+   }
+   button.btn-destroy {
+      background: #888;
+      padding:2px;
+      padding-left:8px; padding-right:8px;
+      font-size: 12px; font-weight:bold;
+   }
+}

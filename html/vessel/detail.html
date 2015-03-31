@@ -1,0 +1,137 @@
+<div floating-shopping-cart></div>
+
+<div class="group clearfix">
+    <div class="g2 first">
+
+        <h2><span class="light">Vessel</span> <span ng-bind="vessel.object.Vessel_Name"></span></h2>
+        <h4>
+            <span class="light" ng-bind="captain.object.Title"></span>
+            <span ng-bind="captain.object.First_Name"></span>
+            <span ng-bind="captain.object.Last_Name"></span>
+        </h4>
+
+        <div ng-if="destination" class="destination" style="margin-bottom:10px">
+            <span class="light">located at</span>
+            <strong ng-bind="destination.object.DestName"></strong>,
+            <strong ng-bind="destination.object.Region"></strong>,
+            <strong ng-bind="destination.object.State"></strong>,
+            <strong ng-bind="destination.object.Country"></strong>
+        </div>
+
+        <div class="feature" ng-if="vessel.object.Manufacturer">
+            &raquo; Manufacturer: <strong ng-bind="vessel.object.Manufacturer"></strong>
+        </div>
+        <div class="feature" ng-if="vessel.object.Model">
+            &raquo; Model: <strong ng-bind="vessel.object.Model"></strong>
+        </div>
+        <div class="feature" ng-if="vessel.object.Year_Manufactured">
+            &raquo; Year Manufactured: <strong ng-bind="vessel.object.Year_Manufactured"></strong>
+        </div>
+        <div class="feature" ng-if="vessel.object.Length">
+            &raquo; Length: <strong ng-bind="vessel.object.Length"></strong>
+        </div>
+        <div class="feature" ng-if="vessel.object.Horse_Power">
+            &raquo; Horse Powers: <strong ng-bind="vessel.object.Horse_Power"></strong>
+        </div>
+        <div class="feature" ng-if="vessel.object.Speed">
+            &raquo; Speed: <strong ng-bind="vessel.object.Speed"></strong>
+        </div>
+        <div class="feature" ng-if="vessel.object.Shares">
+            &raquo; Fishermen: <strong ng-bind="vessel.object.Shares"></strong>
+        </div>
+
+        <div> &nbsp; </div>
+        <p class="description" ng-if="vessel.object.Description" ng-bind-html="vessel.object.Description | trusted_html"></p>
+
+    </div> <!-- .g2.first -->
+    <div class="g2 last" auto-height additional-height="30">
+
+        <div ng-if="vessel.images && vessel.images.length">
+            <div big-images source="vessel.images"></div>
+        </div>
+
+    </div> <!-- .g2.last -->
+</div> <!-- /group -->
+
+
+<form class="availability_form" ng-submit="see_availability()">
+    <label> Select Trip Date: </label><input required ng-required type="text"
+            ui-date-format="yy-mm-dd" ui-date="dateOptions"
+            ng-model="availability.dt" class="datepicker" />
+    <!-- <label> Fishermen: </label>--> <input type="text" maxlength="2" required class="fishermen" ng-model="availability.men" style="display:none" value="1" />
+    <button type="submit" ng-disabled="!availability.dt || !availability.men">See Availability</button>
+</form>
+
+<div class="charter" ng-repeat="charter in charters">
+    <hr />
+    <div class="from_price">
+        <h2 style="display:inline">From: $<strong ng-bind="charter.object.From_Price"></strong></h2>
+    </div>
+
+    <a href="javascript:void(0)" title="{{charter.object.Headline}}" ng-click="navigate_charter(charter.object.ID)">
+        <h2><span class="light">Trip</span> <span ng-bind="charter.object.Headline"></span></h2>
+    </a>
+
+    <div class="group clearfix">
+        <div class="w33pct" style="min-width:300px;min-height:100px;">
+            <div small-images source="charter.images"></div>
+        </div>
+        <div class="w66pct">
+
+            <div class="book_btn_container">
+                <button title="Book Charter Trip {{charter.object.Headline}}" ng-click="select_reminder()">Book</button>
+            </div>
+
+            <div class="feature" ng-bind-html="charter.species | nice_species | trusted_html"></div>
+            <div class="feature" ng-bind-html="charter.features | nice_features | trusted_html"></div>
+
+            <!-- <div class="feature" ng-if="charter.object.Species_Comments">Species Comments: <strong ng-bind="charter.object.Species_Comments"></strong></div> -->
+            <div class="feature" ng-if="charter.object.Tournament == '1'">Tournament Start: <strong ng-bind="charter.object.Season_Start_Date | nice_date"></strong></div>
+            <div class="feature" ng-if="charter.object.Tournament == '1'">Tournament End: <strong ng-bind="charter.object.Season_End_Date | nice_date"></strong></div>
+            <div class="feature" ng-if="charter.object.Tournament == '0'">Season Start: <strong ng-bind="charter.object.Season_Start_Date | annual_date"></strong></div>
+            <div class="feature" ng-if="charter.object.Tournament == '0'">Season End: <strong ng-bind="charter.object.Season_End_Date | annual_date"></strong></div>
+
+            <div> &nbsp; </div>
+
+            <p ng-bind-html="charter.object.Description | trusted_html"></p>
+            <p ng-if="charter.object.Provided_Comments">Comments: <span ng-bind="charter.object.Provided_Comments"></span></p>
+
+        </div>
+    </div>
+
+
+    <div class="table-responsive">
+        <table class="table table-border">
+            <thead>
+                <tr>
+                    <th>Vessel</th>
+                    <th style="text-align:center" >Start</th>
+                    <th style="text-align:center" >Duration</th>
+                    <th style="text-align:center" >Fisherman</th>
+                    <th style="text-align:right">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="avail in charter.availability">
+                    <td ng-bind="avail.Vessel_Name"></td>
+                    <td style="text-align:center" ng-bind="avail.Start_Time | nice_time"></td>
+                    <td style="text-align:center" ng-bind="avail.Duration_Hours + ' hours'"></td>
+                    <td style="text-align:center" ng-bind="avail.Shares"></td>
+                    <td style="text-align:right" ng-bind="avail.Price | nice_price"></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<!-- 
+<div ng-if="vessel.object">
+    <h4>Current Vessels Location</h4>
+    <map zoom="5" center="[{{ vessel.object.Lat }}, {{ vessel.object.Long }} ]">
+      <marker  ng-if="vessel.object"
+          position="[{{ vessel.object.Lat }}, {{ vessel.object.Long }} ]"
+          title="{{vessel.object.Vessel_Name}}"
+          visible="true"></marker>
+    </map>
+</div>
+-->

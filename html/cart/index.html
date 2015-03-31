@@ -1,0 +1,49 @@
+<div id="wahroo-shopping-cart" ng-if="hasItemsInCart()">
+    <h3 style="margin:0px;padding:0px">Your booking</h3>
+
+    <div ng-repeat="(avail_id, shares) in cartItems"
+         ng-if="shares"
+         ng-controller="ShoppingCartItemController">
+        <hr />
+        <div style="position:relative;">
+            <div style="position:absolute; top:-8px; right:0px">
+                <button class="btn-destroy" ng-click="destroy(avail_id)">x</button>
+            </div>
+            <div style="width:90%;">
+                <strong ng-bind="getCharterName(avail_id)"></strong> on
+                <span ng-bind="getVesselName(avail_id)"></span>
+            </div>
+
+            <div style="text-align:center;font-size:11px;border-top:1px #bbb dashed; border-bottom: 1px #bbb dashed">
+                starts at <span ng-bind="getStartTime( avail_id ) | nice_time"></span>
+                and lasts for <span ng-bind="getDuration( avail_id )"></span> hours.
+            </div>
+            <div style="text-align:center;font-weight:bold">
+                <span ng-bind="shares"></span> fishermen
+            </div>
+        </div>
+
+    </div>
+
+    <div ng-if="hasItemsInCart()">
+        <hr />
+        <table style="width:100%">
+            <tr>
+                <td>SubTotal:</td>
+                <td style="text-align:right;font-weight:bold" ng-bind="getSubTotal() | nice_price"></td>
+            </tr>
+            <tr>
+                <td>Deposit:</td>
+                <td style="text-align:right;font-weight:bold" ng-bind="getDepositTotal() | nice_price"></td>
+            </tr>
+        </table>
+
+        <hr />
+        <div style="text-align:center; font-size:12px;">
+            Proceed to <a href="http://www.wahroo.com/">Wahroo's</a> secure connection
+        </div>
+        <div style="text-align:center">
+            <button ng-click="checkout()">Book Now</button>
+        </div>
+    </div>
+</div>
