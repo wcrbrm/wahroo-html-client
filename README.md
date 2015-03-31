@@ -21,10 +21,14 @@ git clone https://github.com/wcrbrm/wahroo-html-client
 
 All parameters are optional
 
-Parameter | Example Value | Description
----|---|---
-`data-url` | `/charter/102` | Default location inside the web application
-`data-html-root` | `/wahroo-html-client/` | Http path to html client distribution
-`data-api-root` | `/api/v1/` | Http path of the RESTful API
-`data-container` | `#booking-container` | CSS selector of container to which embedding will be done
+Parameter | Description
+---|---
+**data-url**| Default location inside the web application.
+ | Example: `/charter/102` 
+**data-html-root** | Http path to html client distribution
+ | Example: `/wahroo-html-client/`
+**data-api-root**  | Http path of the RESTful API
+ | Example: `/api/v1/`
+**data-container** | CSS selector of container to which embedding will be done
+ | Example: `#booking-container`
 
