@@ -1,5 +1,7 @@
 WAHROO API HTML CLIENT
 ===
+*Warning: Wahroo's HTML API is on beta, more changes are coming!*
+
 
 ## Installation instructions
 
