@@ -23,12 +23,12 @@ All parameters are optional
 
 Parameter | Description
 ---|---
-`data-url` | Default location inside the web application.
+*data-url* | Default location inside the web application.
  | Example: `/charter/102` 
-`data-html-root` | Http path to html client distribution
+*data-html-root* | Http path to html client distribution
  | Example: `/wahroo-html-client/`
-`data-api-root`  | Http path of the RESTful API
+*data-api-root*  | Http path of the RESTful API
  | Example: `/api/v1/`
-`data-container` | CSS selector of container to which embedding will be done
+*data-container* | CSS selector of container to which embedding will be done
  | Example: `#booking-container`
 
