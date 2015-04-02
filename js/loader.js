@@ -8,6 +8,10 @@
 //# sourceMappingURL=head.load.min.js.map
 */
 
+function mapsLoaded() {
+
+}
+
 var whrldr = {};
 whrldr.log = function( x )
 {
@@ -20,106 +24,119 @@ whrldr.log = function( x )
     }
 };
 
-function mapsLoaded()
-{
-};
 
-whrldr.init = function( opt ) {
+( function() {
 
-    whrldr.log( opt );
-    whrldr.webroot = opt.html_root;
+    whrldr.init = function( opt ) {
 
-    // LOAD CSS
-    head.load( whrldr.webroot + "dist/" + opt.bundle + ".css",function() {
+        whrldr.log( opt );
+        whrldr.webroot = opt.html_root;
 
-        whrldr.log( "CSS was loaded");
-
-        // LOAD JAVASCRIPT MODULES AFTER CSS IS LOADED
-        $script([
-            "//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js",
-            "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular.js",
-            "//maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&callback=mapsLoaded"
-        ], function() {
-            $script([
-                "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular-route.min.js",
-                "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular-animate.min.js",
-                "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular-cookies.min.js",
-
-                whrldr.webroot + "js/angular/ui-date.js",
-                whrldr.webroot + "js/angular/lodash.min.js" ,
-                whrldr.webroot + "js/angular/restangular.min.js",
-                whrldr.webroot + "js/angular/ng-map.js"
-            ], function() {
-
-                // once we have all libraries - loading our APP
-                whrldr.log( "Libraries loaded, loading app");
-
-                jQuery("html").attr("ng-app","app"); //ensure we will be good with angular
-
-                $script ( whrldr.webroot + "dist/" + opt.bundle + ".min.js?t=" + Math.random(), function() {
-                    whrldr.log( "Application was loaded");
-
-                    angular.module("app").constant('RESOURCES', (function() {
-                      return {
-                        ROOT_HTML: opt.html_root,
-                        ROOT_API: opt.api_root,
-                        DEFAULT_LOCATION : opt.location
-                      }
-                    })());
-
-                    angular.bootstrap(document, ['app']);
-
-                });
-            });
+        // fix links with href="#" that everyone loves.
+        jQuery("a[href=#]").each( function() {
+            if ( jQuery(this).attr("href") == '#' ) {
+                jQuery(this).attr("href", 'javascript:void(0)');
+                // now this should not be an angularjs link anymore!
+            }
         });
 
-    });
-};
+        // LOAD CSS
+        head.load( whrldr.webroot + "dist/" + opt.bundle + ".css",function() {
+
+            whrldr.log( "wahroo: CSS was loaded");
+
+            // LOAD JAVASCRIPT MODULES AFTER CSS IS LOADED
+            $script([
+                "//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js",
+                "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular.js",
+                "//maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&callback=mapsLoaded"
+            ], function() {
+                $script([
+                    "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular-route.min.js",
+                    "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular-animate.min.js",
+                    "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular-cookies.min.js",
+
+                    whrldr.webroot + "js/angular/ui-date.js",
+                    whrldr.webroot + "js/angular/lodash.min.js" ,
+                    whrldr.webroot + "js/angular/restangular.min.js",
+                    whrldr.webroot + "js/angular/ng-map.js"
+                ], function() {
+
+                    // once we have all libraries - loading our APP
+                    whrldr.log( "wahroo: libraries loaded, loading application");
+                    jQuery("html").attr("ng-app","app"); //ensure we will be good with angular
+
+                    $script ( whrldr.webroot + "dist/" + opt.bundle + ".min.js?t=" + Math.random(), function() {
+                        whrldr.log( "wahroo: application was loaded successfully");
+
+                        angular.module("app").constant('RESOURCES', (function() {
+                          return {
+                            ROOT_HTML: opt.html_root,
+                            ROOT_API:  opt.api_root,
+                            DEFAULT_LOCATION : opt.location
+                          }
+                        })());
+
+                        angular.bootstrap(document, ['app']);
+
+                    });
+                });
+            });
+
+        }); // head: css loader launched
+    };
 
 
-jQuery( document ).ready( function() {
+    jQuery( document ).ready( function() {
 
-    jQuery( "script" ).each( function( ) {
-        if ( jQuery(this).attr("src") &&
-             jQuery(this).attr("src").indexOf( "js/loader.js" ) !== -1 ) {
+        jQuery( "script" ).each( function( ) {
+            if ( jQuery(this).attr("src") &&
+                 jQuery(this).attr("src").indexOf( "js/loader.js" ) !== -1 ) {
 
-            whrldr.log( "wahroo: loader.js detected");
+                whrldr.log( "wahroo: loader.js detected????");
 
-            var sSelector = jQuery(this).attr("data-container");
-            if ( ! sSelector ) { sSelector = jQuery(this).parent(); } // defaults for wordpress
+                var sSelector = jQuery(this).attr("data-container");
+                if ( ! sSelector ) { sSelector = jQuery(this).parent(); } // defaults for wordpress
 
-            if ( jQuery("#wahroo-page-container").length === 0 ) {
+        	    if ( jQuery( sSelector ).length == 0 ) {
+            		whrldr.log( "wahroo: container was not found by selector " + sSelector );
+                    return;
+        	    }
 
-                whrldr.webroot  = jQuery(this).attr( "data-html-root" ) ? jQuery(this).attr( "data-html-root" ) : "wahroo-html-client/";
+                if ( jQuery("#wahroo-page-container").length === 0 ) {
 
-                // inserting at the beginning of URL
-                jQuery( sSelector ).append( '<div id="wahroo-page-container">' +
-                   // '<div floating-shopping-cart></div>' +
-                    '<div class="view-frame-parent">' +
-                        '<div class="view-frame" ng-init="scope_var=1" ng-view>'+
-                            '<div style="text-align:center"><img width="128" height="128" src="' + whrldr.webroot + 'images/loader/340.gif" alt="loading" /></div>' +
+                    whrldr.webroot  = jQuery(this).attr( "data-html-root" ) ? jQuery(this).attr( "data-html-root" ) : "wahroo-html-client/";
+
+                    // inserting at the beginning of URL
+                    jQuery( sSelector ).append( '<div id="wahroo-page-container">' +
+                       // '<div floating-shopping-cart></div>' +
+                        '<div class="view-frame-parent">' +
+                            '<div class="view-frame" ng-init="scope_var=1" ng-view>'+
+                                '<div style="text-align:center"><img width="128" height="128" src="' + whrldr.webroot + 'images/loader/340.gif" alt="loading" /></div>' +
+                            '</div>' +
                         '</div>' +
-                    '</div>' +
-                '</div>' );
+                    '</div>' );
 
-                whrldr.log( "wahroo: initialising");
-                jQuery("#wahroo-page-container").animate( { "min-height" : "+=600"}, 5000 );
+                    whrldr.log( "wahroo: initialising");
+                    jQuery("#wahroo-page-container").animate( { "min-height" : "+=600"}, 5000 );
 
-                // init classes and loading page
-                whrldr.init( {
-                    "location"  : jQuery(this).attr( "data-url" ) ? jQuery(this).attr( "data-url" ) : "/",
-                    'api_root'  : jQuery(this).attr( "data-api-root" ) ? jQuery(this).attr( "data-api-root" ) : "http://www.wahroo.com/api/v1/",
-                    "html_root" : whrldr.webroot,
-                    'bundle'   : "operator",
-                    "element"  : jQuery("#wahroo-cart-container")
-                } );
-            } else {
-                whrldr.log( "wahroo: already initialized");
+                    // init classes and loading page
+                    whrldr.init( {
+                        "location"  : jQuery(this).attr( "data-url" ) ? jQuery(this).attr( "data-url" ) : "/",
+                        'api_root'  : jQuery(this).attr( "data-api-root" ) ? jQuery(this).attr( "data-api-root" ) : "http://www.wahroo.com/api/v1/",
+                        "html_root" : whrldr.webroot,
+                        'bundle'   : "operator",
+                        "element"  : jQuery("#wahroo-cart-container")
+                    } );
+                } else {
+                    whrldr.log( "wahroo: already initialized");
 
+                }
             }
-        }
 
 
-    } ); //each <script
-} ); // document.ready
+        } ); //each <script
+    } ); // document.ready
 
+
+} )();

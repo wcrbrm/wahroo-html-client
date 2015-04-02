@@ -16,10 +16,11 @@ git clone https://github.com/wcrbrm/wahroo-html-client
 	data-url="/vessels/38"></script>
 <!-- WAHROO EMBEDDING END -->
 ```
-done, we are ready to start.
+Loader.js uses JQuery library and therefore must be inserted only after it.
 
+Installation is finished at that point and can be checked. Please watch errors in console for troubleshooting.
 
-## Javascript loader parameters
+## Javascript loader arguments
 
 All parameters are optional
 

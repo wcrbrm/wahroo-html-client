@@ -17,6 +17,10 @@ angular.module('app').directive('bigImages', [ 'RESOURCES', function( RESOURCES 
             $scope.fadeToSlide = function( nextSlide, speed ){
                 $scope.currentSlide = nextSlide;
                 setTimeout(function(){ jQuery(window).trigger('resize'); }, 50);
+                setTimeout(function(){ jQuery(window).trigger('resize'); }, 1000);
+                setTimeout(function(){ jQuery(window).trigger('resize'); }, 1500);
+                setTimeout(function(){ jQuery(window).trigger('resize'); }, 3000);
+                setTimeout(function(){ jQuery(window).trigger('resize'); }, 5000);
             };
 
             $scope.change = function( nSlide ) {
@@ -84,6 +88,7 @@ angular.module('app').directive('smallImages', [ 'RESOURCES', function( RESOURCE
                 }
                 $scope.change(nextSlide);
             };
+
         } ]
     };
 }] );
@@ -121,7 +126,7 @@ angular.module('app').directive('autoHeight', [
             // parentHeight = $window.innerHeight - $element.parent()[0].getBoundingClientRect().top;
 
             // console.log( "height of image inside: " + $element.find( "img" ).height() );
-            return $element.css('height', ( $element.find( "img" ).height() + parseInt( additionalHeight, 10) ) + "px" );
+            return $element.css('height', ( $element.find( "img:visible" ).height() + parseInt( additionalHeight, 10) ) + "px" );
             // return $element.css('height', parentHeight - combineHeights(siblings($element)) - additionalHeight);
           });
           return $timeout(function() {

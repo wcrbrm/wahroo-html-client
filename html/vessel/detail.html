@@ -1,5 +1,17 @@
 <div floating-shopping-cart></div>
 
+<div style="text-align:center">
+    <strong>To book a trip, check its availability by selecting trip date below:</strong>
+</div>
+
+<form class="availability_form" ng-submit="see_availability()">
+    <label> Select another trip date: </label><input required ng-required type="text"
+            ui-date-format="yy-mm-dd" ui-date="dateOptions"
+            ng-model="availability.dt" class="datepicker" />
+    <!-- <label> Fishermen: </label>--> <input type="text" maxlength="2" required class="fishermen" ng-model="availability.men" style="display:none" value="1" />
+    <button type="submit" ng-disabled="!availability.dt || !availability.men">See Availability</button>
+</form>
+
 <div class="group clearfix">
     <div class="g2 first">
 
@@ -54,13 +66,6 @@
 </div> <!-- /group -->
 
 
-<form class="availability_form" ng-submit="see_availability()">
-    <label> Select Trip Date: </label><input required ng-required type="text"
-            ui-date-format="yy-mm-dd" ui-date="dateOptions"
-            ng-model="availability.dt" class="datepicker" />
-    <!-- <label> Fishermen: </label>--> <input type="text" maxlength="2" required class="fishermen" ng-model="availability.men" style="display:none" value="1" />
-    <button type="submit" ng-disabled="!availability.dt || !availability.men">See Availability</button>
-</form>
 
 <div class="charter" ng-repeat="charter in charters">
     <hr />
@@ -124,7 +129,7 @@
     </div>
 </div>
 
-<!-- 
+<!--
 <div ng-if="vessel.object">
     <h4>Current Vessels Location</h4>
     <map zoom="5" center="[{{ vessel.object.Lat }}, {{ vessel.object.Long }} ]">
