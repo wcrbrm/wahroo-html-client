@@ -1,6 +1,6 @@
 <div class="slideshow big"  ng-if="images.length">
 
-    <div class="changer">
+    <div class="changer" ng-if="images.length > 1">
         <button ng-click="prev()" class="left">◄</button>
         <div class="title">
             <span ng-bind="currentSlide+1"></span> of <span ng-bind="images.length"></span>
