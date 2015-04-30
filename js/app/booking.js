@@ -57,6 +57,7 @@ function getCharterSplitOptions( nShares, nSplits ) {
 }
 
 
+( function( $ ) {
 angular.module('app').directive('selectToBook', [ '$compile', '$rootScope', 'ShoppingCart', function( $compile, $rootScope, ShoppingCart ){
     return {
         restrict: 'A',
@@ -213,3 +214,6 @@ angular.module('app').directive('floatingShoppingCart', [ 'RESOURCES', '$rootSco
         } ]
     };
 } ] );
+
+
+} )(jQuery );

@@ -4,7 +4,15 @@
 
 
 // .post-content { border: 1px #bbb solid; }
-#wrapper .post-content h2 { line-height:48px; }
+#wrapper .post-content h2 {
+   line-height:48px;
+   @media( max-width: 480px ) {
+      font-size: 26px;
+      line-height:32px;
+   }
+}
+
+
 #wrapper .post-content a:hover h2 { color:#04ade0; }
 
 body * .light { color:#bbb; }
