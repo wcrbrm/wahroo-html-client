@@ -31,7 +31,7 @@
            .when( '/404',     {  templateUrl: baseHtml + '/html/404.html' } )
            .when( '/wahroo',  {  templateUrl: baseHtml + '/html/blank.html' } )
 
-        // .otherwise( { "redirectTo" : RESOURCES.DEFAULT_LOCATION } )
+           .otherwise( { "redirectTo" : RESOURCES.DEFAULT_LOCATION } )
         ;
     }
     AppRouteProvider.$inject = [ 'RestangularProvider', '$routeProvider', '$locationProvider', 'RESOURCES' ];
