@@ -75,7 +75,7 @@
     <h4>Unfortunately no charters are available at the given date. Please try another charter trip date.</h4>
 </div>
 
-<div class="charter" ng-repeat="charter in charters" ng-if="charter.calendar.length">
+<div ng-repeat="charter in charters" ng-if="charter.calendar.length">
     <hr />
     <div class="from_price" ng-if="!isPhone()">
         <h2 style="display:inline">From: <strong ng-bind="charter.object.From_Price | nice_price"></strong></h2>
@@ -107,7 +107,7 @@
         </div>
     </div>
 
-    <div ng-if="isPhone()">
+    <div  class="charter charter-avail"  ng-if="isPhone()">
         <div ng-repeat="calendar in charter.calendar">
             <table class="table table-bordered table-striped">
                 <tr>
