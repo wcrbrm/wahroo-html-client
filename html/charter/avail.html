@@ -5,7 +5,7 @@
 </div> -->
 
 <a href="javascript:void(0)" title="{{charter.object.Headline}}" ng-click="navigate_charter(charter.object.ID)">
-    <h2><span class="light">Charter Trip</span> <span ng-bind="charter.object.Headline"></span></h2>
+    <h2><span ng-bind="charter.object.Headline"></span></h2>
 </a>
 
 <div class="group clearfix">
@@ -34,29 +34,74 @@
         <p ng-if="charter.object.Provided_Comments">Comments: <span ng-bind="charter.object.Provided_Comments"></span></p>
 
     </div> <!-- .g2.first -->
-    <div class="g2 last" auto-height additional-height="30">
-
-        <div ng-if="charter.images && charter.images.length">
-            <div big-images source="charter.images"></div>
+    <div class="g2 last reserved-height">
+        <div auto-height additional-height="30">
+            <div ng-if="charter.images && charter.images.length">
+                <div big-images source="charter.images"></div>
+            </div>
         </div>
 
     </div> <!-- .g2.last -->
 </div> <!-- /group -->
 
 
-<form class="availability_form" ng-submit="see_availability()">
-    <label> Select another trip date: </label><input required ng-required type="text"
-            ui-date-format="yy-mm-dd" ui-date="dateOptions"
-            ng-model="availability.dt" class="datepicker" />
-    <!-- <label> Fishermen: </label>--> <input type="text" maxlength="2" required class="fishermen" ng-model="availability.men" style="display:none" value="1" />
-    <button type="submit" ng-disabled="!availability.dt || !availability.men">Change Date</button>
-    <button ng-click="reset_availability()">Cancel Date</button>
+<form class="availability_form">
+    <label> Select another trip date: </label>
+
+    <input ng-if="!isPhone()" required ng-required type="text" ui-date-format="yy-mm-dd"
+        ui-date="dateOptions" ng-model="availability.dt" class="datepicker" />
+
+    <div ng-if="isPhone()" required ui-date-format="yy-mm-dd"
+        ui-date="dateMobileOptions" ng-model="availability.dt" class="datepicker"></div>
+
+    <!-- <label> Fishermen: </label>-->
+    <input type="text" maxlength="2" required class="fishermen" ng-model="availability.men" style="display:none" value="1" />
+    <button type="button" ng-click="see_availability()" ng-disabled="!availability.dt || !availability.men">Change Date</button>
+    <button type="button" class="cancel"  ng-click="reset_availability()">Cancel Date</button>
 </form>
+
 <div ng-if="nothing_is_available()" style="text-align:center">
     <h4>Unfortunately no charters are available at the given date. Please try another charter trip date.</h4>
 </div>
 
-<div class="table-responsive">
+<div class="charter" ng-if="isPhone()">
+    <div ng-repeat="calendar in charter.calendar">
+        <table class="table table-bordered table-striped">
+            <tr>
+                <td>Start Time:</td>
+                <td ng-bind="calendar.Start_DateTime | nice_datetime"></td>
+            </tr>
+            <tr>
+                <td>End Time:</td>
+                <td ng-bind="calendar.End_DateTime | nice_datetime"></td>
+            </tr>
+            <tr>
+                <td>Duration:</td>
+                <td ng-bind="calendar.Duration_Hours + ' hours'"></td>
+            </tr>
+            <tr>
+                <td>Available Shares:</td>
+                <td>
+                 <span ng-bind="calendar.Shares - calendar.Booked"></span>
+                 of
+                 <span ng-bind="calendar.Shares"></span>
+                </td>
+            </tr>
+            <tr>
+                <td>Price:</td>
+                <td style="font-weight:bold;" ng-bind="calendar.Price | nice_price"></td>
+            </tr>
+            <tr>
+                <td colspan="2" style="text-align:center">
+                    <div style="text-align:center" select-to-book record="calendar"></div>
+                </td>
+            </tr>
+        </table>
+
+    </div>
+</div>
+
+<div class="charter table-responsive" ng-if="!isPhone()">
     <table class="table table-border">
         <thead>
             <tr>
@@ -67,7 +112,7 @@
                 <th style="text-align:center" >Fisherman</th>
                 <th style="text-align:center" >Avail</th>
                 <th style="text-align:right"> Price</th>
-                <th style="text-align:right;color:red"> Book</th>
+                <th style="text-align:right;"> </th>
             </tr>
         </thead>
         <tbody>
@@ -83,7 +128,7 @@
                 <td style="text-align:center" ng-bind="calendar.Shares - calendar.Booked"></td>
                 <td style="text-align:right"  ng-bind="calendar.Price | nice_price"></td>
                 <td style="text-align:right">
-                    <select select-to-book record="calendar"></select>
+                    <div select-to-book record="calendar"></div>
                 </td>
             </tr>
         </tbody>

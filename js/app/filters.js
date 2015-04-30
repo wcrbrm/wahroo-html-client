@@ -40,6 +40,15 @@ angular.module('app')
       };
   });
 
+
+angular.module('app')
+  .filter('nice_zero_price', function() {
+      return function( strPrice ) {
+          return "$" + parseFloat( strPrice ).toFixed(2);
+      };
+  });
+
+
 angular.module('app')
   .filter('nice_features', function() {
       return function( features ) {

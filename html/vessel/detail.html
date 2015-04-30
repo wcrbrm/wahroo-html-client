@@ -4,12 +4,18 @@
     <strong>To book a trip, check its availability by selecting trip date below:</strong>
 </div>
 
-<form class="availability_form" ng-submit="see_availability()">
-    <label> Select another trip date: </label><input required ng-required type="text"
-            ui-date-format="yy-mm-dd" ui-date="dateOptions"
-            ng-model="availability.dt" class="datepicker" />
+<form class="availability_form">
+    <label> Select trip date: </label>
+
+    <input ng-if="!isPhone()" required ng-required type="text" ui-date-format="yy-mm-dd"
+        ui-date="dateOptions" ng-model="availability.dt" class="datepicker" />
+
+    <div ng-if="isPhone()" required ui-date-format="yy-mm-dd"
+        ui-date="dateMobileOptions" ng-model="availability.dt" class="datepicker"></div>
+
     <!-- <label> Fishermen: </label>--> <input type="text" maxlength="2" required class="fishermen" ng-model="availability.men" style="display:none" value="1" />
-    <button type="submit" ng-disabled="!availability.dt || !availability.men">See Availability</button>
+    <button ng-if="availability.dt" type="button" ng-click="see_availability()"
+            ng-disabled="!availability.dt || !availability.men">See Availability</button>
 </form>
 
 <div class="group clearfix">
@@ -56,17 +62,19 @@
         <p class="description" ng-if="vessel.object.Description" ng-bind-html="vessel.object.Description | trusted_html"></p>
 
     </div> <!-- .g2.first -->
-    <div class="g2 last" auto-height additional-height="30">
+    <div class="g2 last reserved-height" >
 
-        <div ng-if="vessel.images && vessel.images.length">
-            <div big-images source="vessel.images"></div>
+        <div auto-height additional-height="30">
+            <div ng-if="vessel.images && vessel.images.length">
+                <div big-images source="vessel.images"></div>
+            </div>
         </div>
 
     </div> <!-- .g2.last -->
 </div> <!-- /group -->
 
 
-
+<!--
 <div class="charter" ng-repeat="charter in charters">
     <hr />
     <div class="from_price">
@@ -74,7 +82,7 @@
     </div>
 
     <a href="javascript:void(0)" title="{{charter.object.Headline}}" ng-click="navigate_charter(charter.object.ID)">
-        <h2><span class="light">Trip</span> <span ng-bind="charter.object.Headline"></span></h2>
+        <h2><span ng-bind="charter.object.Headline"></span></h2>
     </a>
 
     <div class="group clearfix">
@@ -90,7 +98,7 @@
             <div class="feature" ng-bind-html="charter.species | nice_species | trusted_html"></div>
             <div class="feature" ng-bind-html="charter.features | nice_features | trusted_html"></div>
 
-            <!-- <div class="feature" ng-if="charter.object.Species_Comments">Species Comments: <strong ng-bind="charter.object.Species_Comments"></strong></div> -->
+
             <div class="feature" ng-if="charter.object.Tournament == '1'">Tournament Start: <strong ng-bind="charter.object.Season_Start_Date | nice_date"></strong></div>
             <div class="feature" ng-if="charter.object.Tournament == '1'">Tournament End: <strong ng-bind="charter.object.Season_End_Date | nice_date"></strong></div>
             <div class="feature" ng-if="charter.object.Tournament == '0'">Season Start: <strong ng-bind="charter.object.Season_Start_Date | annual_date"></strong></div>
@@ -128,6 +136,7 @@
         </table>
     </div>
 </div>
+-->
 
 <!--
 <div ng-if="vessel.object">

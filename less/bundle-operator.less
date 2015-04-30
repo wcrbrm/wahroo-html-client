@@ -9,6 +9,10 @@
 
 body * .light { color:#bbb; }
 
+@media(max-width:480px) {
+  h2 { font-size:20px; font-weight:bold; }
+}
+
 // alternative to .clearfix
 #wahroo-page-container {
   .group:before, .group:after { content: " "; display: table; }
@@ -192,6 +196,13 @@ body * .light { color:#bbb; }
     }
   }
 
+.reserved-height {
+   min-height:400px;
+   @media( max-width:480px ) {
+      min-height:250px;
+   }
+}
+
   .availability_form {
        background: #eee;
        border: 1px #ccc solid;
@@ -199,9 +210,28 @@ body * .light { color:#bbb; }
        text-align:center;
        padding:20px;
 
-       label { font-weight:bold; color: #1a80b6; }
+       .datepicker { width:120px; text-align:center; }
 
-      .datepicker { width:120px; text-align:center; }
+       @media( max-width:480px ) {
+         padding:20px 0px;
+         .datepicker {
+            margin: 0px auto;
+            width: 18.5em;
+            padding: 0px 0px;
+         }
+         button[type=submit] {
+           font-size:20px;
+           display:block; margin: 0px auto;
+           margin-top:10px;
+         }
+         button.cancel {
+           display:block; margin: 0px auto;
+           margin-top:10px;
+         }
+
+       }
+
+       label { font-weight:bold; color: #1a80b6; }
       .fishermen { text-align:center; width: 50px; }
 
       button {
@@ -210,6 +240,7 @@ body * .light { color:#bbb; }
         cursor:pointer; font-size:16px;background: #444; color:white;
         font-family: "Oswald", Arial, Helvetica, sans-serif;
         vertical-align:middle;
+        font-weight:bold;
       }
       button[disabled=disabled], button:disabled {
         background: #aaa;
@@ -223,11 +254,20 @@ body * .light { color:#bbb; }
 
 }
 
+select.booking {
+  padding:5px 5px;
+}
+button.cancel {
+  background-color:#a0a0a0 !important;
+}
+
 #wahroo-shopping-cart {
    position: fixed;
    z-index:10;
    right:5px;
    top:46px;
+   overflow:hidden;
+
    width:250px;
    border: 1px #bbb solid;
    padding:10px;
@@ -235,6 +275,9 @@ body * .light { color:#bbb; }
    box-shadow: -2px 0px 10px #aaa;
 
    h1,h2,h3,h4,h5 { text-align:center; }
+   h3 { font-size:20px; }
+   .inner { overflow:auto; max-height:300px; }
+   hr { margin: 5px 0px;}
 
    button {
       background: #04ade0;
@@ -252,5 +295,15 @@ body * .light { color:#bbb; }
       padding:2px;
       padding-left:8px; padding-right:8px;
       font-size: 12px; font-weight:bold;
+   }
+
+   .cart-collapse {
+      text-align:right;
+      a { color:black; font-size: 10px; }
+
+   }
+
+   @media( max-width:480px ) {
+      top:10px;
    }
 }

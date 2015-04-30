@@ -8,7 +8,8 @@
 
     var Util =  {
         first : function( obj ) { for (var a in obj) return obj[a]; },
-        dateOptions : { numberOfMonths: 2, changeYear: true, changeMonth: true }
+        dateOptions : { numberOfMonths: 2, minDate: new Date(), changeYear: true, changeMonth: true },
+        dateMobileOptions : { numberOfMonths: 1, minDate: new Date(), changeYear: true, changeMonth: true }
     };
 
     /* @ngInject */
@@ -26,6 +27,7 @@
         $scope.vessel_id = $routeParams.id;
         $scope.availability = { dt: "", men: 1 };
         $scope.dateOptions = Util.dateOptions;
+        $scope.dateMobileOptions = Util.dateMobileOptions;
 
         VesselRequest.promise.to.read( $routeParams.id ).then( function( response ) {
             $scope.response = response;
@@ -63,6 +65,7 @@
         $scope.vessel_id = $routeParams.id;
         $scope.availability = { dt: $routeParams.dt, men: $routeParams.men };
         $scope.dateOptions = Util.dateOptions;
+        $scope.dateMobileOptions = Util.dateMobileOptions;
 
         $scope.nothing_is_available = function() {
             for ( var ch in $scope.charters ) {

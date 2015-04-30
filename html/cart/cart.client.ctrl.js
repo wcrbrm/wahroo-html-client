@@ -26,6 +26,10 @@
             var calendar = $scope.calendar( nAvailId );
             return calendar.Start_Time;
         };
+        $scope.getStartDate = function( nAvailId ) {
+            var calendar = $scope.calendar( nAvailId );
+            return calendar.Start_DateTime;
+        };
         $scope.getDuration = function( nAvailId ) {
             var calendar = $scope.calendar( nAvailId );
             return calendar.Duration_Hours;

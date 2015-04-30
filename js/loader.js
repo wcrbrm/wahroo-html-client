@@ -123,7 +123,7 @@ whrldr.log = function( x )
                     // init classes and loading page
                     whrldr.init( {
                         "location"  : jQuery(this).attr( "data-url" ) ? jQuery(this).attr( "data-url" ) : "/",
-                        'api_root'  : jQuery(this).attr( "data-api-root" ) ? jQuery(this).attr( "data-api-root" ) : "http://www.wahroo.com/api/v1/",
+                        'api_root'  : jQuery(this).attr( "data-api-root" ) ? jQuery(this).attr( "data-api-root" ) : "https://www.wahroo.com/api/v1/",
                         "html_root" : whrldr.webroot,
                         'bundle'   : "operator",
                         "element"  : jQuery("#wahroo-cart-container")

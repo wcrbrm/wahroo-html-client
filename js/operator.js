@@ -31,13 +31,13 @@
            .when( '/404',     {  templateUrl: baseHtml + '/html/404.html' } )
            .when( '/wahroo',  {  templateUrl: baseHtml + '/html/blank.html' } )
 
-            .otherwise( { "redirectTo" : RESOURCES.DEFAULT_LOCATION } )
+        // .otherwise( { "redirectTo" : RESOURCES.DEFAULT_LOCATION } )
         ;
     }
     AppRouteProvider.$inject = [ 'RestangularProvider', '$routeProvider', '$locationProvider', 'RESOURCES' ];
 
     /* @ngInject */
-    function AppRunner($rootScope, $timeout, $window, $templateCache, Restangular, RESOURCES ) {
+    function AppRunner($rootScope, $timeout, $window, $location, $templateCache, Restangular, RESOURCES ) {
 
         $rootScope.resources = RESOURCES;
         $rootScope.cartItems = {};
@@ -49,9 +49,12 @@
 
         $rootScope.$on( '$routeChangeStart', function() {
             $rootScope.errors = [];
-
             $rootScope.back = function() {
                 $window.history.back();
+            };
+
+            $rootScope.isPhone = function() {
+                return ( /Android|webOS|iPhone|iPod|BlackBerry/i.test(navigator.userAgent) );
             };
         });
         $rootScope.$on('$routeChangeSuccess', function () {
@@ -109,6 +112,6 @@
         });
 
     }
-    AppRunner.$inject = ['$rootScope', '$timeout', '$window', '$templateCache', 'Restangular', 'RESOURCES' ];
+    AppRunner.$inject = ['$rootScope', '$timeout', '$window', '$location', '$templateCache', 'Restangular', 'RESOURCES' ];
 
 } )();

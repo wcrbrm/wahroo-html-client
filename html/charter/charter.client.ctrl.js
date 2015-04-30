@@ -8,7 +8,8 @@
 
     var Util =  {
         first : function( obj ) { for (var a in obj) return obj[a]; },
-        dateOptions : { numberOfMonths: 2, changeYear: true, changeMonth: true }
+        dateOptions : { numberOfMonths: 2, minDate: new Date(), changeYear: true, changeMonth: true },
+        dateMobileOptions : { numberOfMonths: 1, minDate: new Date(), changeYear: true, changeMonth: true }
     };
 
 
@@ -23,17 +24,18 @@
 
 
 
-
     /* @ngInject */
     function CharterDetailsController( $scope, $routeParams, CharterRequest, $location ) {
 
         $scope.charter_id = $routeParams.id;
         $scope.availability = { dt: "", men: 1 };
         $scope.dateOptions = Util.dateOptions;
+        $scope.dateMobileOptions = Util.dateMobileOptions;
+        $scope.loading = true;
 
         CharterRequest.promise.to.read( $routeParams.id ).then( function( response ) {
             $scope.response = response;
-            console.log( response );
+            $scope.loading = false;
 
             $scope.charter = response.charter[0];
             $scope.captain = response.captain[0];
@@ -69,13 +71,17 @@
         $scope.charter_id = $routeParams.id;
         $scope.availability = { dt: $routeParams.dt, men: $routeParams.men };
         $scope.dateOptions = Util.dateOptions;
+        $scope.dateMobileOptions = Util.dateMobileOptions;
+        $scope.loading = true;
 
         $scope.nothing_is_available = function() {
-            if ( $scope.charter && $scope.charter.calendar && $scope.charter.calendar.length > 0 ) return false;
+            if ( !$scope.loading &&
+                $scope.charter && $scope.charter.calendar && $scope.charter.calendar.length > 0 ) return false;
             return true;
         };
 
         $scope.reset_availability = function() {
+            // console.log( "reset_availability " + "/charters/" + $scope.charter_id );
             $scope.availability = { dt: "", men: 1 };
             $location.path( "/charters/" + $scope.charter_id  );
         };
@@ -96,6 +102,7 @@
             $scope.captain = response.captain[0];
             $scope.vessels = response.vessel;
             $scope.destination = response.destination[0];
+            $scope.loading = false;
         });
 
     }
