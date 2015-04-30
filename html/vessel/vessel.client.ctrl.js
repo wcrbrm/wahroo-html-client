@@ -24,6 +24,7 @@
     /* @ngInject */
     function VesselDetailsController( $scope, $routeParams, VesselRequest, $location ) {
 
+        $scope.loading = true;
         $scope.vessel_id = $routeParams.id;
         $scope.availability = { dt: "", men: 1 };
         $scope.dateOptions = Util.dateOptions;
@@ -36,6 +37,7 @@
             $scope.captain = response.captain[0];
             $scope.charters = response.charter;
             $scope.destination = response.destination[0];
+            $scope.loading = false;
         });
 
         $scope.select_reminder = function() {
@@ -62,6 +64,7 @@
     /* @ngInject */
     function VesselAvailabilityController( $scope, $routeParams, VesselAvailRequest, $location ) {
 
+        $scope.loading = true;
         $scope.vessel_id = $routeParams.id;
         $scope.availability = { dt: $routeParams.dt, men: $routeParams.men };
         $scope.dateOptions = Util.dateOptions;
@@ -97,6 +100,7 @@
             $scope.charters = response.charter;
             $scope.destination = response.destination[0];
 
+            $scope.loading = false;
         });
     }
     VesselAvailabilityController.$inject = [ '$scope', '$routeParams', 'VesselAvailRequest', '$location' ];

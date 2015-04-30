@@ -35,12 +35,13 @@
 
         CharterRequest.promise.to.read( $routeParams.id ).then( function( response ) {
             $scope.response = response;
-            $scope.loading = false;
 
             $scope.charter = response.charter[0];
             $scope.captain = response.captain[0];
             $scope.vessels = response.vessel;
             $scope.destination = response.destination[0];
+
+            $scope.loading = false;
         });
 
         $scope.select_reminder = function() {
