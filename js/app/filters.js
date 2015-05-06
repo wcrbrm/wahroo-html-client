@@ -122,7 +122,11 @@ angular.module('app')
               var m_names = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
                 "Aug", "Sep", "Oct", "Nov", "Dec");
               var dt = new Date( strIso );
-              return dt.getUTCFullYear() + ", " + m_names[ dt.getUTCMonth() ] + " " + (dt.getUTCDate());
+              var sOut = m_names[ dt.getUTCMonth() ] + " " + (dt.getUTCDate());
+              if ( dt.getUTCFullYear() != (new Date()).getUTCFullYear() ) {
+                 sOut += ", " + date.getUTCFullYear();
+              }
+              return sOut;
           }
           return "";
       };

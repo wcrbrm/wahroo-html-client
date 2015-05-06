@@ -48,7 +48,7 @@ whrldr.log = function( x )
             // LOAD JAVASCRIPT MODULES AFTER CSS IS LOADED
             $script([
                 "//cdnjs.cloudflare.com/ajax/libs/jqueryui/1.11.2/jquery-ui.js",
-                "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular.js",
+                "//cdnjs.cloudflare.com/ajax/libs/angular.js/1.2.28/angular.min.js",
                 "//maps.googleapis.com/maps/api/js?v=3.exp&signed_in=true&callback=mapsLoaded"
             ], function() {
                 $script([

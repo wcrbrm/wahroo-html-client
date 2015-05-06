@@ -45,7 +45,7 @@
 </div> <!-- /group -->
 
 
-<form class="availability_form">
+<form ng-if="!loading" class="availability_form">
     <label> Select another trip date: </label>
 
     <input ng-if="!isPhone()" required ng-required type="text" ui-date-format="yy-mm-dd"
@@ -60,11 +60,15 @@
     <button type="button" class="cancel"  ng-click="reset_availability()">Cancel Date</button>
 </form>
 
-<div ng-if="nothing_is_available()" style="text-align:center">
+<div ng-if="loading" style="text-align:center">
+    <img width="128" height="128" ng-src="{{resources.ROOT_HTML}}/images/loader/340.gif" alt="loading" />
+</div>
+
+<div ng-if="!loading && nothing_is_available()" style="text-align:center">
     <h4>Unfortunately no charters are available at the given date. Please try another charter trip date.</h4>
 </div>
 
-<div class="charter charter-avail" ng-if="isPhone()">
+<div class="charter charter-avail" ng-if="!loading && isPhone()">
     <div ng-repeat="calendar in charter.calendar">
         <table class="table table-bordered table-striped">
             <tr>
@@ -101,7 +105,7 @@
     </div>
 </div>
 
-<div class="charter table-responsive" ng-if="!isPhone()">
+<div class="charter table-responsive" ng-if="!loading &&!isPhone()">
     <table class="table table-border">
         <thead>
             <tr>
