@@ -8,6 +8,9 @@
         me = this;
 
         this.item = {
+            reset : function() {
+                localStorage.setItem( "wahroo", "");
+            },
             add : function( nAvailID, nShares, calendar ) {
                 if ( parseInt( nShares, 10 ) === 0 ) { return this.item.remove( nAvailID ); }
                 localStorage.setItem( "calendar_" + nAvailID, JSON.stringify( calendar ) );
@@ -27,7 +30,9 @@
                 localStorage.setItem("wahroo",  JSON.stringify( $rootScope.cartItems ) );
             },
             book : function() {
-                $script(  RESOURCES.ROOT_API + "checkout?cart=" + escape( JSON.stringify( $rootScope.cartItems ) ) );
+                var sCart = JSON.stringify( $rootScope.cartItems ) ;
+                localStorage.setItem( "wahroo", "");
+                $script( RESOURCES.ROOT_API + "checkout?cart=" + escape( sCart ) );
             }
         };
         return this;

@@ -97,6 +97,7 @@ angular.module('app')
   .filter('nice_time', function() {
       return function( strTime ) {
           if ( strTime ) {
+
               var date = new Date();
               date.setUTCHours( strTime.substring(0,2) );
               date.setUTCMinutes( strTime.substring(3,5) );
@@ -122,7 +123,9 @@ angular.module('app')
               var m_names = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
                 "Aug", "Sep", "Oct", "Nov", "Dec");
               var dt = new Date( strIso );
+
               var sOut = m_names[ dt.getUTCMonth() ] + " " + (dt.getUTCDate());
+
               if ( dt.getUTCFullYear() != (new Date()).getUTCFullYear() ) {
                  sOut += ", " + date.getUTCFullYear();
               }
@@ -140,7 +143,10 @@ angular.module('app')
               var m_names = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
                 "Aug", "Sep", "Oct", "Nov", "Dec");
 
-              var date = new Date( strIso );
+              var date = new Date( strIso.replace( /\-/g, "/" ).replace("T", " ").replace( /\..+$/, '' ) );
+//               console.log( "nice_datetime " + strIso.replace( /\-/g, "/" ).replace("T", " ").replace( /\..+$/g, '' ) );
+              // console.log( date );
+
               var hours = date.getHours();
               var minutes = date.getMinutes();
               var ampm = hours >= 12 ? 'pm' : 'am';
@@ -166,7 +172,7 @@ angular.module('app')
           if ( strIso ) {
               var m_names = new Array("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul",
                 "Aug", "Sep", "Oct", "Nov", "Dec");
-              var dt = new Date( strIso );
+              var dt = new Date( strIso.replace( /\-/g, "/" ).replace("T", " ").replace( /\..+$/, '' )  );
               return m_names[ dt.getUTCMonth() ] + " " + (dt.getUTCDate());
           }
           return "";

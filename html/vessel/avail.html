@@ -165,12 +165,14 @@
             <tbody>
                 <tr ng-repeat="calendar in charter.calendar">
                     <td>
-                        <a href="javascript:void(0)" title="{{calendar.Vessel_Name}}" ng-click="navigate_vessel(calendar.Vessel_id)"
+                        <a
+                            href="javascript:void(0)" title="{{calendar.Vessel_Name}}" ng-click="navigate_vessel(calendar.Vessel_id)"
                             ng-bind="calendar.Vessel_Name"></a>
+
                     </td>
                     <td style="text-align:center" ng-bind="calendar.Start_DateTime | nice_datetime"></td>
                     <td style="text-align:center" ng-bind="calendar.End_DateTime | nice_datetime"></td>
-                    <td style="text-align:center" ng-bind="calendar.Duration_Hours + ' hours'"></td>
+                    <td style="text-align:center" title="{{calendar.Trip_Availability_ID}}" ng-bind="calendar.Duration_Hours + ' hours'"></td>
                     <td style="text-align:center" ng-bind="calendar.Shares"></td>
                     <td style="text-align:center" ng-bind="calendar.Shares - calendar.Booked"></td>
                     <td style="text-align:right"  ng-bind="calendar.Price | nice_price"></td>
