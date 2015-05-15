@@ -186,10 +186,10 @@ angular.module('app').directive('floatingShoppingCart', [ 'RESOURCES', '$rootSco
                    var fltSubTotal = parseFloat( calendar.Price, 10 ) * nQty / parseFloat( calendar.Shares, 10 );
                    var decDeposit =  fltSubTotal * parseFloat( calendar.Deposit_Percent, 10 ) / 100;
 
-                   console.log( [ parseFloat( calendar.FeePct, 10 ),
-                                  decDeposit * ( parseFloat( calendar.FeePct, 10 )) / 100,
-                                  parseFloat( calendar.Embedded_Booking_Fee_Percent, 10 ),
-                                  fltSubTotal * ( parseFloat( calendar.Embedded_Booking_Fee_Percent, 10 ) ) / 100 ] );
+                   //console.log( [ parseFloat( calendar.FeePct, 10 ),
+                   //               decDeposit * ( parseFloat( calendar.FeePct, 10 )) / 100,
+                   //               parseFloat( calendar.Embedded_Booking_Fee_Percent, 10 ),
+                   //               fltSubTotal * ( parseFloat( calendar.Embedded_Booking_Fee_Percent, 10 ) ) / 100 ] );
 
                    var decFee = decDeposit * ( parseFloat( calendar.FeePct, 10 )) / 100 +
                                 fltSubTotal * ( parseFloat( calendar.Embedded_Booking_Fee_Percent, 10 ) ) / 100;

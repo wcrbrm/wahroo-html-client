@@ -1,49 +1,5 @@
 <div floating-shopping-cart></div>
 
-<!-- <div class="from_price">
-    <h2 style="display:inline">From: $<strong ng-bind="charter.object.From_Price"></strong></h2>
-</div> -->
-
-<a href="javascript:void(0)" title="{{charter.object.Headline}}" ng-click="navigate_charter(charter.object.ID)">
-    <h2><span ng-bind="charter.object.Headline"></span></h2>
-</a>
-
-<div class="group clearfix">
-    <div class="g2 first">
-
-        <div ng-if="destination" class="destination" style="margin-bottom:10px">
-            <span class="light">at</span>
-            <strong ng-bind="destination.object.DestName"></strong>,
-            <strong ng-bind="destination.object.Region"></strong>,
-            <strong ng-bind="destination.object.State"></strong>,
-            <strong ng-bind="destination.object.Country"></strong>
-        </div>
-
-        <div class="feature" ng-bind-html="charter.species | nice_species | trusted_html"></div>
-        <div class="feature" ng-bind-html="charter.features | nice_features | trusted_html"></div>
-
-        <!-- <div class="feature" ng-if="charter.object.Species_Comments">Species Comments: <strong ng-bind="charter.object.Species_Comments"></strong></div> -->
-        <div class="feature" ng-if="charter.object.Tournament == '1'">Tournament Start: <strong ng-bind="charter.object.Season_Start_Date | nice_date"></strong></div>
-        <div class="feature" ng-if="charter.object.Tournament == '1'">Tournament End: <strong ng-bind="charter.object.Season_End_Date | nice_date"></strong></div>
-        <div class="feature" ng-if="charter.object.Tournament == '0'">Season Start: <strong ng-bind="charter.object.Season_Start_Date | annual_date"></strong></div>
-        <div class="feature" ng-if="charter.object.Tournament == '0'">Season End: <strong ng-bind="charter.object.Season_End_Date | annual_date"></strong></div>
-
-        <div> &nbsp; </div>
-
-        <p ng-bind-html="charter.object.Description | trusted_html"></p>
-        <p ng-if="charter.object.Provided_Comments">Comments: <span ng-bind="charter.object.Provided_Comments"></span></p>
-
-    </div> <!-- .g2.first -->
-    <div class="g2 last reserved-height">
-        <div auto-height additional-height="30">
-            <div ng-if="charter.images && charter.images.length">
-                <div big-images source="charter.images"></div>
-            </div>
-        </div>
-
-    </div> <!-- .g2.last -->
-</div> <!-- /group -->
-
 
 <form ng-if="!loading" class="availability_form">
     <label> Select another trip date: </label>
@@ -67,6 +23,11 @@
 <div ng-if="!loading && nothing_is_available()" style="text-align:center">
     <h4>Unfortunately no charters are available at the given date. Please try another charter trip date.</h4>
 </div>
+
+
+<a href="javascript:void(0)" title="{{charter.object.Headline}}" ng-click="navigate_charter(charter.object.ID)">
+    <h2><span ng-bind="charter.object.Headline"></span></h2>
+</a>
 
 <div class="charter charter-avail" ng-if="!loading && isPhone()">
     <div ng-repeat="calendar in charter.calendar">
@@ -105,7 +66,7 @@
     </div>
 </div>
 
-<div class="charter table-responsive" ng-if="!loading &&!isPhone()">
+<div class="charter table-desktop  table-responsive" ng-if="!loading &&!isPhone()">
     <table class="table table-border">
         <thead>
             <tr>
@@ -138,3 +99,46 @@
         </tbody>
     </table>
 </div>
+
+
+
+<!-- <div class="from_price">
+    <h2 style="display:inline">From: $<strong ng-bind="charter.object.From_Price"></strong></h2>
+</div> -->
+
+<div class="group clearfix">
+    <div class="g2 first">
+
+        <div ng-if="destination" class="destination" style="margin-bottom:10px">
+            <span class="light">at</span>
+            <strong ng-bind="destination.object.DestName"></strong>,
+            <strong ng-bind="destination.object.Region"></strong>,
+            <strong ng-bind="destination.object.State"></strong>,
+            <strong ng-bind="destination.object.Country"></strong>
+        </div>
+
+        <div class="feature" ng-bind-html="charter.species | nice_species | trusted_html"></div>
+        <div class="feature" ng-bind-html="charter.features | nice_features | trusted_html"></div>
+
+        <!-- <div class="feature" ng-if="charter.object.Species_Comments">Species Comments: <strong ng-bind="charter.object.Species_Comments"></strong></div> -->
+        <div class="feature" ng-if="charter.object.Tournament == '1'">Tournament Start: <strong ng-bind="charter.object.Season_Start_Date | nice_date"></strong></div>
+        <div class="feature" ng-if="charter.object.Tournament == '1'">Tournament End: <strong ng-bind="charter.object.Season_End_Date | nice_date"></strong></div>
+        <div class="feature" ng-if="charter.object.Tournament == '0'">Season Start: <strong ng-bind="charter.object.Season_Start_Date | annual_date"></strong></div>
+        <div class="feature" ng-if="charter.object.Tournament == '0'">Season End: <strong ng-bind="charter.object.Season_End_Date | annual_date"></strong></div>
+
+        <div> &nbsp; </div>
+
+        <p ng-bind-html="charter.object.Description | trusted_html"></p>
+        <p ng-if="charter.object.Provided_Comments">Comments: <span ng-bind="charter.object.Provided_Comments"></span></p>
+
+    </div> <!-- .g2.first -->
+    <div class="g2 last reserved-height">
+        <div auto-height additional-height="30">
+            <div ng-if="charter.images && charter.images.length">
+                <div big-images source="charter.images"></div>
+            </div>
+        </div>
+
+    </div> <!-- .g2.last -->
+</div> <!-- /group -->
+

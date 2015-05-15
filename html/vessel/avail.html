@@ -1,13 +1,38 @@
 <div floating-shopping-cart></div>
 
+<form ng-if="!loading" class="availability_form">
+    <label> Select another trip date: </label>
+
+    <input ng-if="!isPhone()" required ng-required type="text" ui-date-format="yy-mm-dd"
+        ui-date="dateOptions" ng-model="availability.dt" class="datepicker" />
+
+    <div ng-if="isPhone()" required ui-date-format="yy-mm-dd"
+        ui-date="dateMobileOptions" ng-model="availability.dt" class="datepicker"></div>
+
+    <!-- <label> Fishermen: </label>-->
+    <input type="text" maxlength="2" required class="fishermen" ng-model="availability.men" style="display:none" value="1" />
+    <button type="button" ng-click="see_availability()" ng-disabled="!availability.dt || !availability.men">Change Date</button>
+    <button type="button" class="cancel" ng-click="reset_availability()">Cancel Date</button>
+</form>
+
 <h2>
     <span class="light">Vessel</span> <span ng-bind="vessel.object.Vessel_Name"></span>
     <span class="light">availability on </span>
-    <span class="light" ng-bind="availability.dt | nice_date"></span>
+    <strong class="light" ng-bind="availability.dt | nice_date"></strong>
 </h2>
 
+<!--
 <div class="group">
     <div class="g2 first">
+
+        <div auto-height additional-height="30">
+            <div ng-if="vessel.images && vessel.images.length">
+                <div big-images source="vessel.images"></div>
+            </div>
+        </div>
+    </div>
+    <div class="g2 last reserved-height">
+
         <h4>
             <span class="light" ng-bind="captain.object.Title"></span>
             <span ng-bind="captain.object.First_Name"></span>
@@ -35,7 +60,7 @@
             &raquo; Length: <strong ng-bind="vessel.object.Length"></strong>
         </div>
         <div class="feature" ng-if="vessel.object.Horse_Power">
-            &raquo; Horse Powers: <strong ng-bind="vessel.object.Horse_Power"></strong>
+            &raquo; Horse Power: <strong ng-bind="vessel.object.Horse_Power"></strong>
         </div>
         <div class="feature" ng-if="vessel.object.Speed">
             &raquo; Speed: <strong ng-bind="vessel.object.Speed"></strong>
@@ -43,33 +68,9 @@
         <div class="feature" ng-if="vessel.object.Shares">
             &raquo; Fishermen: <strong ng-bind="vessel.object.Shares"></strong>
         </div>
+    </div>
+</div>  /group -->
 
-    </div> <!-- .g2.first -->
-    <div class="g2 last reserved-height">
-        <div auto-height additional-height="30">
-            <div ng-if="vessel.images && vessel.images.length">
-                <div big-images source="vessel.images"></div>
-            </div>
-        </div>
-
-    </div> <!-- .g2.last -->
-</div> <!-- /group -->
-
-
-<form ng-if="!loading" class="availability_form">
-    <label> Select another trip date: </label>
-
-    <input ng-if="!isPhone()" required ng-required type="text" ui-date-format="yy-mm-dd"
-        ui-date="dateOptions" ng-model="availability.dt" class="datepicker" />
-
-    <div ng-if="isPhone()" required ui-date-format="yy-mm-dd"
-        ui-date="dateMobileOptions" ng-model="availability.dt" class="datepicker"></div>
-
-    <!-- <label> Fishermen: </label>-->
-    <input type="text" maxlength="2" required class="fishermen" ng-model="availability.men" style="display:none" value="1" />
-    <button type="button" ng-click="see_availability()" ng-disabled="!availability.dt || !availability.men">Change Date</button>
-    <button type="button" class="cancel" ng-click="reset_availability()">Cancel Date</button>
-</form>
 
 <div ng-if="loading" style="text-align:center">
     <img width="128" height="128" ng-src="{{resources.ROOT_HTML}}/images/loader/340.gif" alt="loading" />
@@ -88,28 +89,6 @@
         <h2> <span ng-bind="charter.object.Headline"></span></h2>
     </a>
 
-    <div class="group clearfix">
-        <div class="w33pct">
-            <div auto-height additional-height="30">
-                <div small-images source="charter.images"></div>
-            </div>
-        </div>
-        <div class="w66pct">
-            <div class="feature" ng-bind-html="charter.species | nice_species | trusted_html"></div>
-            <div class="feature" ng-bind-html="charter.features | nice_features | trusted_html"></div>
-
-            <!-- <div class="feature" ng-if="charter.object.Species_Comments">Species Comments: <strong ng-bind="charter.object.Species_Comments"></strong></div> -->
-            <div class="feature" ng-if="charter.object.Tournament == '1'">Tournament Start: <strong ng-bind="charter.object.Season_Start_Date | nice_date"></strong></div>
-            <div class="feature" ng-if="charter.object.Tournament == '1'">Tournament End: <strong ng-bind="charter.object.Season_End_Date | nice_date"></strong></div>
-            <div class="feature" ng-if="charter.object.Tournament == '0'">Season Start: <strong ng-bind="charter.object.Season_Start_Date | annual_date"></strong></div>
-            <div class="feature" ng-if="charter.object.Tournament == '0'">Season End: <strong ng-bind="charter.object.Season_End_Date | annual_date"></strong></div>
-
-            <div> &nbsp; </div>
-
-            <p ng-bind-html="charter.object.Description | trusted_html"></p>
-            <p ng-if="charter.object.Provided_Comments">Comments: <span ng-bind="charter.object.Provided_Comments"></span></p>
-        </div>
-    </div>
 
     <div  class="charter charter-avail"  ng-if="!loading && isPhone()">
         <div ng-repeat="calendar in charter.calendar">
@@ -148,16 +127,16 @@
         </div>
     </div>
 
-    <div class="charter table-responsive" ng-if="!loading && !isPhone()">
+    <div class="charter table-desktop table-responsive" ng-if="!loading && !isPhone()">
         <table class="table table-border">
             <thead>
                 <tr>
                     <th>Vessel</th>
                     <th style="text-align:center">Start</th>
-                    <th style="text-align:center" >End</th>
-                    <th style="text-align:center" >Duration</th>
-                    <th style="text-align:center" >Fisherman</th>
-                    <th style="text-align:center" >Avail</th>
+                    <th style="text-align:center">End</th>
+                    <th style="text-align:center">Duration</th>
+                    <th style="text-align:center">Fisherman</th>
+                    <th style="text-align:center">Avail</th>
                     <th style="text-align:right"> Price</th>
                     <th style="text-align:right;"></th>
                 </tr>
@@ -183,6 +162,31 @@
             </tbody>
         </table>
     </div>
+
+    <div class="group clearfix">
+        <div class="w33pct">
+            <div auto-height additional-height="30">
+                <div small-images source="charter.images"></div>
+            </div>
+        </div>
+        <div class="w66pct">
+            <div class="feature" ng-bind-html="charter.species | nice_species | trusted_html"></div>
+            <div class="feature" ng-bind-html="charter.features | nice_features | trusted_html"></div>
+
+            <!-- <div class="feature" ng-if="charter.object.Species_Comments">Species Comments: <strong ng-bind="charter.object.Species_Comments"></strong></div> -->
+            <div class="feature" ng-if="charter.object.Tournament == '1'">Tournament Start: <strong ng-bind="charter.object.Season_Start_Date | nice_date"></strong></div>
+            <div class="feature" ng-if="charter.object.Tournament == '1'">Tournament End: <strong ng-bind="charter.object.Season_End_Date | nice_date"></strong></div>
+            <div class="feature" ng-if="charter.object.Tournament == '0'">Season Start: <strong ng-bind="charter.object.Season_Start_Date | annual_date"></strong></div>
+            <div class="feature" ng-if="charter.object.Tournament == '0'">Season End: <strong ng-bind="charter.object.Season_End_Date | annual_date"></strong></div>
+
+            <div> &nbsp; </div>
+
+            <p ng-bind-html="charter.object.Description | trusted_html"></p>
+            <p ng-if="charter.object.Provided_Comments">Comments: <span ng-bind="charter.object.Provided_Comments"></span></p>
+        </div>
+    </div>
+
+
 </div>
 
 <!--

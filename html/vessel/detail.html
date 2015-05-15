@@ -1,8 +1,8 @@
 <div floating-shopping-cart></div>
 
-<div style="text-align:center">
+<!-- <div style="text-align:center">
     <strong>To book a trip, check its availability by selecting trip date below:</strong>
-</div>
+</div> -->
 
 <form class="availability_form">
     <label> Select trip date: </label>
@@ -14,7 +14,7 @@
         ui-date="dateMobileOptions" ng-model="availability.dt" class="datepicker"></div>
 
     <!-- <label> Fishermen: </label>--> <input type="text" maxlength="2" required class="fishermen" ng-model="availability.men" style="display:none" value="1" />
-    <button ng-if="availability.dt" type="button" ng-click="see_availability()"
+    <button type="button" ng-click="see_availability()"
             ng-disabled="!availability.dt || !availability.men">See Availability</button>
 </form>
 
@@ -24,6 +24,16 @@
 
 <div class="group clearfix" ng-if="!loading">
     <div class="g2 first">
+
+        <div auto-height additional-height="30">
+            <div ng-if="vessel.images && vessel.images.length">
+                <div big-images source="vessel.images"></div>
+            </div>
+        </div>
+
+    </div> <!-- .g2.first -->
+    <div class="g2 last reserved-height" >
+
 
         <h2><span class="light">Vessel</span> <span ng-bind="vessel.object.Vessel_Name"></span></h2>
         <h4>
@@ -53,7 +63,7 @@
             &raquo; Length: <strong ng-bind="vessel.object.Length"></strong>
         </div>
         <div class="feature" ng-if="vessel.object.Horse_Power">
-            &raquo; Horse Powers: <strong ng-bind="vessel.object.Horse_Power"></strong>
+            &raquo; Horse Power: <strong ng-bind="vessel.object.Horse_Power"></strong>
         </div>
         <div class="feature" ng-if="vessel.object.Speed">
             &raquo; Speed: <strong ng-bind="vessel.object.Speed"></strong>
@@ -65,14 +75,6 @@
         <div> &nbsp; </div>
         <p class="description" ng-if="vessel.object.Description" ng-bind-html="vessel.object.Description | trusted_html"></p>
 
-    </div> <!-- .g2.first -->
-    <div class="g2 last reserved-height" >
-
-        <div auto-height additional-height="30">
-            <div ng-if="vessel.images && vessel.images.length">
-                <div big-images source="vessel.images"></div>
-            </div>
-        </div>
 
     </div> <!-- .g2.last -->
 </div> <!-- /group -->
